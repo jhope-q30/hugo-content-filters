@@ -1,0 +1,6 @@
+baseURL = '/'
+languageCode = 'en-us'
+title = 'Hugo content filters'
+
+[pagination]
+    pagerSize = 5
