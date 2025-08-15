@@ -4,3 +4,7 @@ title = 'Hugo content filters'
 
 [pagination]
     pagerSize = 5
+
+[caches]
+    [caches.images]
+        dir = ':cacheDir/images'
