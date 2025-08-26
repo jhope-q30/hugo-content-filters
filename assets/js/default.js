@@ -1,12 +1,12 @@
 import * as params from '@params'; /// import from Hugo
-import { scrollOffset, getScrollOffset } from "./modules";
+import { scrollOffset, getScrollOffset, ani } from "./modules";
 
 ( function(){
 
     console.log( "default js loaded" );
 
     let update = () => {
-        console.log( "update" );
+        console.log( "update", ani );
         console.log( getScrollOffset() );
     }
 
