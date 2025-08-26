@@ -1,0 +1,18 @@
+baseURL = '/'
+languageCode = 'en-us'
+title = 'Hugo content filters'
+
+[pagination]
+    pagerSize = 5
+
+[caches]
+    [caches.images]
+        dir = ':cacheDir/images'
+
+[markup.goldmark.renderer]
+    hardWraps = false
+    unsafe = true
+
+[markup.goldmark.parser]
+    wrapStandAloneImageWithinParagraph = false
+    autoHeadingID = false

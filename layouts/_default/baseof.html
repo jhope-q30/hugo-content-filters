@@ -22,5 +22,8 @@
     <footer>
         <p>&copy; 2025 Q30 Design</p>
     </footer>
+    {{- with resources.Get "js/default.js" | js.Build ( dict "targetPath" "/js/default.js" "minify" ( not hugo.IsDevelopment ) "params" site.Params.styles ) }}
+    <script src="{{ .RelPermalink }}"></script>
+    {{- end }}
 </body>
 </html>
