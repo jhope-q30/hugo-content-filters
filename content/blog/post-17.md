@@ -1,7 +1,7 @@
 ---
 title: "Adding Analytics to Hugo"
 date: 2025-08-17
-categories: ["Hugo", "Features"]
+categories: ["Hugo", "Features", "Category C"]
 tags: ["analytics", "tracking", "Google Analytics"]
 ---
 

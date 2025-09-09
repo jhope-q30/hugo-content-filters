@@ -1,7 +1,7 @@
 ---
 title: "Integrating Comments"
 date: 2025-08-12
-categories: ["Hugo", "Features"]
+categories: ["Hugo", "Features", "Category A", "Category D"]
 tags: ["comments", "integration", "community"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Optimizing Images in Hugo"
 date: 2025-08-08
-categories: ["Hugo", "Performance"]
+categories: ["Hugo", "Performance", "Category B"]
 tags: ["images", "optimization", "speed"]
 ---
 

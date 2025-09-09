@@ -1,7 +1,7 @@
 ---
 title: "Creating Custom Shortcodes"
 date: 2025-08-07
-categories: ["Hugo", "Advanced"]
+categories: ["Hugo", "Advanced", "Category C"]
 tags: ["shortcodes", "customization", "dynamic content"]
 ---
 

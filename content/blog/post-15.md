@@ -1,7 +1,7 @@
 ---
 title: "Creating Multilingual Sites"
 date: 2025-08-15
-categories: ["Hugo", "Internationalization"]
+categories: ["Hugo", "Internationalization", "Category C"]
 tags: ["multilingual", "languages", "i18n"]
 ---
 

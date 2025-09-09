@@ -1,7 +1,7 @@
 ---
 title: "SEO Best Practices for Hugo"
 date: 2025-08-13
-categories: ["Hugo", "SEO"]
+categories: ["Hugo", "SEO", "Category A"]
 tags: ["seo", "optimization", "search engines"]
 ---
 

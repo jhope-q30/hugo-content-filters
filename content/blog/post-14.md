@@ -1,7 +1,7 @@
 ---
 title: "Using Hugo with Git"
 date: 2025-08-14
-categories: ["Hugo", "Workflow"]
+categories: ["Hugo", "Workflow", "Category B"]
 tags: ["git", "version control", "collaboration"]
 ---
 

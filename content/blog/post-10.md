@@ -1,7 +1,7 @@
 ---
 title: "Using Taxonomies Effectively"
 date: 2025-08-10
-categories: ["Hugo", "Content"]
+categories: ["Hugo", "Content", "Category B"]
 tags: ["taxonomies", "categories", "tags"]
 ---
 

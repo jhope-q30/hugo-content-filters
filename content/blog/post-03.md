@@ -1,7 +1,7 @@
 ---
 title: "Adding Custom Filters"
 date: 2025-08-03
-categories: ["Hugo", "Advanced"]
+categories: ["Hugo", "Advanced", "Category C"]
 tags: ["filters", "customization", "shortcodes"]
 ---
 

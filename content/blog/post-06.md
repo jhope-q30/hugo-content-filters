@@ -1,7 +1,7 @@
 ---
 title: "Writing Markdown for Hugo"
 date: 2025-08-06
-categories: ["Hugo", "Writing"]
+categories: ["Hugo", "Writing", "Category D"]
 tags: ["markdown", "syntax", "tips"]
 ---
 

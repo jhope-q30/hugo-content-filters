@@ -1,7 +1,7 @@
 ---
 title: "Getting Started with Hugo"
 date: 2025-08-01
-categories: ["Hugo", "Tutorial"]
+categories: ["Hugo", "Tutorial", "Category A"]
 tags: ["static site", "beginner", "setup"]
 ---
 

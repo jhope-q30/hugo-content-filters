@@ -1,7 +1,7 @@
 ---
 title: "Understanding Content Organization"
 date: 2025-08-02
-categories: ["Hugo", "Content"]
+categories: ["Hugo", "Content", "Category B"]
 tags: ["organization", "folders", "front matter"]
 ---
 

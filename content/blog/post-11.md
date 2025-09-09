@@ -1,7 +1,7 @@
 ---
 title: "Adding Search to Your Hugo Site"
 date: 2025-08-11
-categories: ["Hugo", "Features"]
+categories: ["Hugo", "Features", "Category C"]
 tags: ["search", "plugins", "user experience"]
 ---
 

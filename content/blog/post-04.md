@@ -1,7 +1,7 @@
 ---
 title: "Using Themes in Hugo"
 date: 2025-08-04
-categories: ["Hugo", "Design"]
+categories: ["Hugo", "Design", "Category C"]
 tags: ["themes", "appearance", "customization"]
 ---
 
