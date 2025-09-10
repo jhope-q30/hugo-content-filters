@@ -2,8 +2,6 @@
 {{ print "<!-- ( List ) -->" | safeHTML }}
 {{ .Content }}
 
-<p>{{ .RegularPages }}</p>
-
 {{- range ( .Paginate .RegularPages.ByDate ).Pages }}
 <div>
     <h2><a href="{{ .RelPermalink }}">{{ .Title | safeHTML }}</a></h2>

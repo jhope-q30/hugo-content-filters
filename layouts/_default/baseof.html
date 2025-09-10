@@ -20,7 +20,7 @@
         {{ block "main" . }}{{ end }}
     </main>
     <footer>
-        <p>&copy; 2025 Q30 Design</p>
+        <p>&copy; {{ now.Format "2006" }} Q30 Design</p>
     </footer>
     {{- with resources.Get "js/default.js" | js.Build ( dict "targetPath" "/js/default.js" "minify" ( not hugo.IsDevelopment ) "params" site.Params.styles ) }}
     <script src="{{ .RelPermalink }}"></script>

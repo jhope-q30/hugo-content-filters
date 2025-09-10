@@ -1,0 +1,20 @@
+{{ define "main" }}
+{{ .Content }}
+{{- $tagGroup := "Numeric" -}}
+{{- $open := "false" -}}
+{{- range .Data.Terms.Alphabetical }}
+{{- if ne ( substr .Page.LinkTitle 0 1 | lower ) $tagGroup }}
+{{- $tagGroup = ( substr .Page.LinkTitle 0 1 | lower ) -}}
+{{- if ne $open "false" }}
+</ul>
+<h2>{{ $tagGroup | upper }}</h2>
+{{- else }}
+<h2>{{ $tagGroup | upper }}</h2>
+{{- end }}
+<ul>
+{{- $open = "true" -}}
+{{- end }}
+<li><a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}</a> ({{ .Count }})</li>
+{{- end }}
+</ul>
+{{ end }}
