@@ -2,17 +2,24 @@
 {{ print "<!-- ( List ) -->" | safeHTML }}
 {{ .Content }}
 
-<p>{{ .RegularPages }}</p>
+{{ print "<!-- ( pages " .RegularPages " ) -->" | safeHTML }}
 
+{{ $taxonomyObject := site.Data }}
+<pre>{{ debug.Dump $taxonomyObject }}</pre>
+
+{{- with .GetTerms "categories" }}
+<h2>Categories</h2>
+{{- range . }}<p><a href="{{ .RelPermalink }}">{{ .Name | safeHTML }}</a></p>{{- end }}
+{{- end }}
+
+<h2>Pages</h2>
 {{- range ( .Paginate .RegularPages.ByDate ).Pages }}
 <div>
-    <h2><a href="{{ .RelPermalink }}">{{ .Title | safeHTML }}</a></h2>
+    <h3><a href="{{ .RelPermalink }}">{{ .Title | safeHTML }}</a></h3>
     {{ .Summary | safeHTML }}
 </div>
 {{- end }}
 
 {{- partial "pagination" ( dict "page" . ) }}
-
-zzzzzzzzzzzz
 
 {{- end }}
