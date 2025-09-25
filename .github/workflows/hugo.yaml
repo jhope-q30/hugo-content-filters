@@ -1,5 +1,5 @@
 # Sample workflow for building and deploying a Hugo site to GitHub Pages
-name: Deploy Hugo site to Pageshgui
+name: Deploy Hugo site to Github pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DART_SASS_VERSION: 1.89.2
-      HUGO_VERSION: 0.142.0
+      HUGO_VERSION: 0.150.0
       HUGO_ENVIRONMENT: production
       TZ: America/Los_Angeles
     steps:

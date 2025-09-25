@@ -4,7 +4,8 @@
 
 {{- range ( .Paginate .RegularPages.ByDate ).Pages }}
 <div>
-    <h2><a href="{{ .RelPermalink }}">{{ .Title | safeHTML }}</a></h2>
+    <h3><a href="{{ .RelPermalink }}">{{ .Title | safeHTML }}</a></h3>
+    {{ .Params }}
     {{ .Summary | safeHTML }}
 </div>
 {{- end }}
