@@ -2,10 +2,24 @@
 {{ print "<!-- ( List ) -->" | safeHTML }}
 {{ .Content }}
 
+{{ print "<!-- ( pages " .RegularPages " ) -->" | safeHTML }}
+
+{{ $taxonomyObject := site.Taxonomies.categories }}
+
+{{- with $taxonomyObject }}
+<h2>Categories</h2>
+<p>
+{{- range . }}
+{{ with .Page }}
+<a href="{{ .RelPermalink }}">{{ .Name | safeHTML }}</a>, 
+{{ end }}
+{{- end }}
+</p>
+{{- end }}
+
 {{- range ( .Paginate .RegularPages.ByDate ).Pages }}
 <div>
     <h3><a href="{{ .RelPermalink }}">{{ .Title | safeHTML }}</a></h3>
-    {{ .Params }}
     {{ .Summary | safeHTML }}
 </div>
 {{- end }}
