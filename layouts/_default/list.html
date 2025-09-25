@@ -4,18 +4,24 @@
 
 {{ print "<!-- ( pages " .RegularPages " ) -->" | safeHTML }}
 
-{{ $taxonomyObject := site.Data }}
-<pre>{{ debug.Dump $taxonomyObject }}</pre>
+{{ $taxonomyObject := site.Taxonomies.categories }}
 
-{{- with .GetTerms "categories" }}
+{{- with $taxonomyObject }}
 <h2>Categories</h2>
-{{- range . }}<p><a href="{{ .RelPermalink }}">{{ .Name | safeHTML }}</a></p>{{- end }}
+<p>
+{{- range . }}
+{{ with .Page }}
+<a href="{{ .RelPermalink }}">{{ .Name | safeHTML }}</a>, 
+{{ end }}
+{{- end }}
+</p>
 {{- end }}
 
 <h2>Pages</h2>
 {{- range ( .Paginate .RegularPages.ByDate ).Pages }}
 <div>
     <h3><a href="{{ .RelPermalink }}">{{ .Title | safeHTML }}</a></h3>
+    {{ .Params }}
     {{ .Summary | safeHTML }}
 </div>
 {{- end }}
