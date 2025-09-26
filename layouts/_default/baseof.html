@@ -14,6 +14,7 @@
 <body>
     <header>
         <h1>{{ .Title | safeHTML }}</h1>
+        <div id="search"></div>
         <nav>{{- range site.Menus.main }}<a href="{{ .URL }}">{{ .Name | safeHTML }}</a>&nbsp;&nbsp;&nbsp;&nbsp;{{- end }}</nav>
     </header>
     <main>
@@ -25,5 +26,11 @@
     {{- with resources.Get "js/default.js" | js.Build ( dict "targetPath" "/js/default.js" "minify" ( not hugo.IsDevelopment ) "params" site.Params.styles ) }}
     <script src="{{ .RelPermalink }}"></script>
     {{- end }}
+    <script src="/pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener( 'DOMContentLoaded', ( event ) => {
+            new PagefindUI({ element: "#search", showSubResults: true });
+        });
+    </script>
 </body>
 </html>

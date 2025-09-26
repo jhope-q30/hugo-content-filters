@@ -4,6 +4,7 @@
 {{- range $k, $v := site.Taxonomies }}
 <p>
     <span>{{ strings.FirstUpper $k }}</span>:
+    <br>
     {{- range $currentPage.GetTerms $k }}
     <a href="{{ .RelPermalink }}" data-pagefind-filter="{{ $k }}">{{ .Title }}</a>,
     {{- end }}
