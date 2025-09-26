@@ -1,4 +1,13 @@
 {{- define "main" }}
+{{- $currentPage := . -}}
 {{ print "<!-- ( Single ) -->" | safeHTML }}
+{{- range $k, $v := site.Taxonomies }}
+<p>
+    <span>{{ strings.FirstUpper $k }}</span>:
+    {{- range $currentPage.GetTerms $k }}
+    <a href="{{ .RelPermalink }}" data-pagefind-filter="{{ $k }}">{{ .Title }}</a>,
+    {{- end }}
+</p>
+{{- end }}
 {{ .Content }}
 {{- end }}

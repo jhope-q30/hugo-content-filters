@@ -4,9 +4,7 @@
 
 {{ print "<!-- ( pages " .RegularPages " ) -->" | safeHTML }}
 
-{{ $taxonomyObject := site.Taxonomies.categories }}
-
-{{- with $taxonomyObject }}
+{{- with site.Taxonomies.categories }}
 <h2>Categories</h2>
 <p>
 {{- range . }}
@@ -15,6 +13,8 @@
 {{ end }}
 {{- end }}
 </p>
+
+<h3>Filter by Cateogry</h3>
 {{- end }}
 
 {{- range ( .Paginate .RegularPages.ByDate ).Pages }}

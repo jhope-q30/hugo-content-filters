@@ -1,7 +1,6 @@
 {{ define "main" }}
-{{ print "<!-- ( categories / taxonomy ) -->" | safeHTML }}
+{{ print "<!-- ( categories / term ) -->" | safeHTML }}
 {{ .Content }}
-{{ range .Data.Terms.Alphabetical }}
-<h2><a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}</a></h2>
-{{ end }}
+{{ .Data }}
+TERM
 {{ end }}
