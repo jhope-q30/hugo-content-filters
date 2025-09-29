@@ -4,6 +4,8 @@
 
 {{ print "<!-- ( pages " .RegularPages " ) -->" | safeHTML }}
 
+<div id="search"></div>
+
 {{- with site.Taxonomies.categories }}
 <h2>Categories</h2>
 <p>

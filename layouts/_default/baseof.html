@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{- if ne .Type "page" }}
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+    {{- end }}
     <title>
         {{- if .IsHome -}}
         {{- .Site.Title | safeHTML -}}
@@ -14,7 +17,6 @@
 <body>
     <header>
         <h1>{{ .Title | safeHTML }}</h1>
-        <div id="search"></div>
         <nav>{{- range site.Menus.main }}<a href="{{ .URL }}">{{ .Name | safeHTML }}</a>&nbsp;&nbsp;&nbsp;&nbsp;{{- end }}</nav>
     </header>
     <main>
@@ -26,11 +28,13 @@
     {{- with resources.Get "js/default.js" | js.Build ( dict "targetPath" "/js/default.js" "minify" ( not hugo.IsDevelopment ) "params" site.Params.styles ) }}
     <script src="{{ .RelPermalink }}"></script>
     {{- end }}
+    {{- if ne .Type "page" }}
     <script src="/pagefind/pagefind-ui.js"></script>
     <script>
         window.addEventListener( 'DOMContentLoaded', ( event ) => {
-            new PagefindUI({ element: "#search", showSubResults: true });
+            new PagefindUI({ element: "#search", showSubResults: true, showEmptyFilters: false });
         });
     </script>
+    {{- end }}
 </body>
 </html>
