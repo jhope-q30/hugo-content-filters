@@ -1,9 +1,11 @@
 ---
-title: Blog
+title: Blog Page
 menus:
     main:
         weight: 2
 ---
+
+This is the blog page
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel pulvinar quam. Vestibulum non lacus dapibus, feugiat nulla eget, accumsan lectus. Aenean eu lectus non massa tincidunt laoreet. Donec cursus dignissim risus, ac tempor diam fermentum vulputate. Morbi in elit eu justo dictum scelerisque. Proin feugiat vel dui eu mollis. Fusce pharetra tortor mauris, non placerat erat sollicitudin in. Pellentesque molestie sagittis ex, at sagittis nulla. Suspendisse ultricies sapien eget lectus interdum lacinia. Cras ultrices turpis risus, porttitor placerat erat aliquam bibendum. Curabitur in facilisis magna. Ut rutrum, justo ut convallis venenatis, est nibh consequat felis, ac ornare arcu nulla ac nulla.
 

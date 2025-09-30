@@ -4,6 +4,8 @@
   ],
   "hints": {
     "axe/structure": "off",
-    "meta-viewport": "off"
+    "meta-viewport": "off",
+    "compat-api/css": "off",
+    "css-prefix-order": "off"
   }
 }

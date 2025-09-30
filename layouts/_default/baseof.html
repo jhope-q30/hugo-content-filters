@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{- if ne .Type "page" }}
     <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-    {{- end }}
     <title>
         {{- if .IsHome -}}
         {{- .Site.Title | safeHTML -}}

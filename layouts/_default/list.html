@@ -4,7 +4,12 @@
 
 {{ print "<!-- ( pages " .RegularPages " ) -->" | safeHTML }}
 
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+
 <div id="search"></div>
+
+Kind: {{ .Kind }}<br>
+Type: {{ .Type }}<br>
 
 {{- with site.Taxonomies.categories }}
 <h2>Categories</h2>
