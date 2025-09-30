@@ -26,6 +26,6 @@
     {{- with resources.Get "js/default.js" | js.Build ( dict "targetPath" "/js/default.js" "minify" ( not hugo.IsDevelopment ) "params" site.Params.styles ) }}
     <script src="{{ .RelPermalink }}"></script>
     {{- end }}
-    <script src="/js/pagefind.js"></script>
+    <script src="/js/pagefind.js" async></script>
 </body>
 </html>
