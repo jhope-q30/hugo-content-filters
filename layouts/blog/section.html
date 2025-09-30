@@ -1,0 +1,49 @@
+{{- define "main" }}
+{{ print "<!-- ( List ) -->" | safeHTML }}
+{{ .Content }}
+
+{{ print "<!-- ( pages: " .RegularPages ", kind: " .Kind ", type: " .Type " ) -->" | safeHTML }}
+
+<div id="search"></div>
+
+<script>
+( async function(){
+
+    const pagefind = await import( "/pagefind/pagefind.js" );
+
+    pagefind.init();
+
+    const filters = await pagefind.filters();
+    const search = await pagefind.search(
+        null,
+        {
+            filters: { type: "blog" }
+        }
+    );
+    const fiveResults = await Promise.all( search.results.slice( 0, 5 ).map( r => r.data() ) );
+    console.log( fiveResults );
+
+}() );
+</script>
+
+{{- with site.Taxonomies.categories }}
+<h2>Categories</h2>
+<p>
+{{- range . }}
+{{ with .Page }}
+<a href="{{ .RelPermalink }}">{{ .Name | safeHTML }}</a>, 
+{{ end }}
+{{- end }}
+</p>
+
+<h3>Filter by Cateogry</h3>
+{{- end }}
+
+{{- range ( .RegularPages.ByDate ) }}
+<div>
+    <h3><a href="{{ .RelPermalink }}">{{ .Title | safeHTML }}</a></h3>
+    {{ .Summary | safeHTML }}
+</div>
+{{- end }}
+
+{{- end }}

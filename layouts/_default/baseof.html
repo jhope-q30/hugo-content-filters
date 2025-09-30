@@ -12,7 +12,7 @@
         {{- end -}}
     </title>
 </head>
-<body>
+<body data-pagefind-filter="type:{{ .Type }}">
     <header>
         <h1>{{ .Title | safeHTML }}</h1>
         <nav>{{- range site.Menus.main }}<a href="{{ .URL }}">{{ .Name | safeHTML }}</a>&nbsp;&nbsp;&nbsp;&nbsp;{{- end }}</nav>
@@ -26,13 +26,6 @@
     {{- with resources.Get "js/default.js" | js.Build ( dict "targetPath" "/js/default.js" "minify" ( not hugo.IsDevelopment ) "params" site.Params.styles ) }}
     <script src="{{ .RelPermalink }}"></script>
     {{- end }}
-    {{- if ne .Type "page" }}
-    <script src="/pagefind/pagefind-ui.js"></script>
-    <script>
-        window.addEventListener( 'DOMContentLoaded', ( event ) => {
-            new PagefindUI({ element: "#search", showSubResults: true, showEmptyFilters: false });
-        });
-    </script>
-    {{- end }}
+    <script src="/js/pagefind.js"></script>
 </body>
 </html>
