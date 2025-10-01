@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{ with .Description }}<meta name="description" data-pagefind-meta="description" content="{{ . | safeHTML }}">{{ end }}
+    {{ with .Date }}<meta name="date" data-pagefind-meta="date" content="{{ . | time.Format ":date_medium" }}">{{ end }}
     <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
     <title>
         {{- if .IsHome -}}
@@ -14,7 +16,7 @@
 </head>
 <body data-pagefind-filter="type:{{ .Type }}">
     <header>
-        <h1>{{ .Title | safeHTML }}</h1>
+        <h1 data-pagefind-meta="title">{{ .Title | safeHTML }}</h1>
         <nav>{{- range site.Menus.main }}<a href="{{ .URL }}">{{ .Name | safeHTML }}</a>&nbsp;&nbsp;&nbsp;&nbsp;{{- end }}</nav>
     </header>
     <main>

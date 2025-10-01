@@ -1,6 +1,7 @@
 ---
 title: "Using Taxonomies Effectively"
 date: 2025-08-10
+description: Taxonomies like categories and tags help organize your content for better discoverability.
 categories: ["Hugo", "Content", "Category B"]
 tags: ["taxonomies", "categories", "tags"]
 ---
