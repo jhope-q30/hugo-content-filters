@@ -4,24 +4,27 @@
 
 {{ print "<!-- ( pages: " .RegularPages ", kind: " .Kind ", type: " .Type " ) -->" | safeHTML }}
 
-<div id="search"></div>
+<div id="results"></div>
 
 <script>
 ( async function(){
 
     const pagefind = await import( "/pagefind/pagefind.js" );
+    const results = document.getElementById( "results" );
 
-    pagefind.init();
+    if( results ) {
 
-    const filters = await pagefind.filters();
-    const search = await pagefind.search(
-        null,
-        {
-            filters: { type: "blog" }
-        }
-    );
-    const fiveResults = await Promise.all( search.results.slice( 0, 5 ).map( r => r.data() ) );
-    console.log( fiveResults );
+        pagefind.init();
+
+        const filters = await pagefind.filters();
+        const search = await pagefind.search( null, { filters: { type: "blog" } } );
+        const searchResults = await Promise.all( search.results.map( r => r.data() ) );
+        
+        Array.prototype.forEach.call( searchResults, ( searchResult, i ) => {
+            console.log( searchResult );
+		});
+
+    }
 
 }() );
 </script>
@@ -37,13 +40,12 @@
 </p>
 
 <h3>Filter by Cateogry</h3>
+
+
 {{- end }}
 
 {{- range ( .RegularPages.ByDate ) }}
-<div>
-    <h3><a href="{{ .RelPermalink }}">{{ .Title | safeHTML }}</a></h3>
-    {{ .Summary | safeHTML }}
-</div>
+{{ .Render "item" }}
 {{- end }}
 
 {{- end }}

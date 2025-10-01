@@ -1,0 +1,17 @@
+{{- $currentPage := . -}}
+<div>
+    <hr>
+    <h4><a href="{{ .RelPermalink }}">{{ .Title | safeHTML }}</a></h4>
+    {{ .Description | safeHTML }}
+    <p>
+    {{ with .Date }}<strong>Date:</strong> {{ . | time.Format ":date_medium" }}<br>{{ end }}
+    {{- range $k, $v := site.Taxonomies }}
+    <strong>{{ strings.FirstUpper $k }}</strong>:
+    {{- range $currentPage.GetTerms $k }}
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>,
+    {{- end }}
+    <br>
+    {{- end }}
+    </p>
+    &nbsp;
+</div>

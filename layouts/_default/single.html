@@ -6,7 +6,7 @@
     <span>{{ strings.FirstUpper $k }}</span>:
     <br>
     {{- range $currentPage.GetTerms $k }}
-    <a href="{{ .RelPermalink }}" data-pagefind-filter="{{ $k }}">{{ .Title }}</a>,
+    <a href="{{ .RelPermalink }}" data-pagefind-filter="{{ $k }}" data-pagefind-meta="title[data-pagefind-filter], url[href]">{{ .Title }}</a>,
     {{- end }}
 </p>
 {{- end }}
