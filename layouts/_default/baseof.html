@@ -7,6 +7,34 @@
     {{ with .Date }}<meta name="date" data-pagefind-meta="date[content]" content="{{ . | time.Format ":date_medium" }}">{{ end }}
     {{ if .IsPage }}
     {{ with .Type }}<meta name="page:type" data-pagefind-filter="type:{{ . }}">{{ end }}
+    {{- $currentPage := . -}}
+    {{ with site.Taxonomies }}
+    <script type="application/ld+json" data-pagefind-meta="taxonomy">
+        [
+        {{- $a := 0 -}}
+        {{- range $k, $v := . }}
+            {{- if ne $a 0 }},{{- end }}
+            {
+                "@context": "http://schema.org",
+                "@type": "{{ $k }}",
+                "@taxonmy": "{{ strings.FirstUpper $k }}",
+                "tags": [
+                    {{- $b := 0 -}}
+                    {{- range $currentPage.GetTerms $k }}
+                    {{- if ne $b 0 }},{{- end }}
+                    {
+                        "title": "{{ .Title | safeHTML }}",
+                        "url": {{ .RelPermalink }}
+                    }
+                    {{- $b = 1 -}}
+                    {{- end }}
+                ]
+            }
+            {{- $a = 1 -}}
+        {{- end }}
+        ]
+    </script>
+    {{ end }}
     {{ end }}
     <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
     <title>

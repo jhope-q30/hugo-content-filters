@@ -21,7 +21,7 @@
         const searchResults = await Promise.all( search.results.map( r => r.data() ) );
         
         Array.prototype.forEach.call( searchResults, ( searchResult, i ) => {
-            console.log( searchResult );
+            console.log( JSON.parse( searchResult.meta.taxonomy ) );
 		});
 
     }
