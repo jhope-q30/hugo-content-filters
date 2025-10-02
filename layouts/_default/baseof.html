@@ -17,7 +17,7 @@
             {
                 "@context": "http://schema.org",
                 "@type": "{{ $k }}",
-                "@taxonmy": "{{ strings.FirstUpper $k }}",
+                "@taxonomy": "{{ strings.FirstUpper $k }}",
                 "tags": [
                     {{- $b := 0 -}}
                     {{- range $currentPage.GetTerms $k }}

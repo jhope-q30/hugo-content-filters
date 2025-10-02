@@ -36,3 +36,16 @@ pass null for all search results tied to filter
                     },
                     {{- end }}
                 ],
+
+
+{{- with site.Taxonomies.categories }}
+<h2>Categories</h2>
+<p>
+{{- range . }}
+{{ with .Page }}
+<a href="{{ .RelPermalink }}">{{ .Name | safeHTML }}</a>, 
+{{ end }}
+{{- end }}
+</p>
+
+{{- end }}

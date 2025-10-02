@@ -4,6 +4,21 @@
 
 {{ print "<!-- ( pages: " .RegularPages ", kind: " .Kind ", type: " .Type " ) -->" | safeHTML }}
 
+<form id="form">
+    <label for="category">Filter by Cateogry</label>
+    {{- with site.Taxonomies.categories }}
+    <select name="category" id="category">
+        {{- range . }}
+        {{ with .Page }}
+        <option value="{{ .Name | safeHTML }}">{{ .Name | safeHTML }}</option>
+        {{ end }}
+        {{- end }}
+    </select>
+    <label for="keyword">Include a keyword (optional):</label>
+    <input type="text" id="keyword">
+    <button type="button" id="submit">Submit</button>
+{{- end }}
+</form>
 <div id="results"></div>
 
 <script>
@@ -11,6 +26,9 @@
 
     const pagefind = await import( "/pagefind/pagefind.js" );
     const results = document.getElementById( "results" );
+    const submit = document.getElementById( "submit" );
+    const form = document.getElementById( "form" );
+    const selectCategory = document.getElementById( "category" );
 
     if( results ) {
 
@@ -19,33 +37,65 @@
         const filters = await pagefind.filters();
         const search = await pagefind.search( null, { filters: { type: "blog" } } );
         const searchResults = await Promise.all( search.results.map( r => r.data() ) );
-        
+
+        /** form */
+        submit.addEventListener( 'click', async ( e ) => {
+            const search = await pagefind.search( null, { filters: { categories: selectCategory.value } } );
+            const searchResults = await Promise.all( search.results.map( r => r.data() ) );
+
+            let output = "";
+            Array.prototype.forEach.call( searchResults, ( searchResult, i ) => {
+                const taxonomy = JSON.parse( searchResult.meta.taxonomy );
+                output += `<div>
+                    <hr>
+                    <h4><a href="${searchResult.url}">${searchResult.meta.title}</a></h4>`;
+                output += searchResult.meta.description;
+                output += `<p>`;
+                output += `<strong>Date: </strong>${searchResult.meta.date}`;
+                Array.prototype.forEach.call( taxonomy, ( term, q ) => {
+                    output += `<br>`;
+                    output += `<strong>${term["@taxonomy"]}</strong>:`;
+                    Array.prototype.forEach.call( term.tags, ( tag, p ) => {
+                        output += `<a href="${tag.url}">${tag.title}</a>, `;
+                    });
+                });
+                output += `<br></p>&nbsp;`;
+                output += `</div>`;
+            });
+            results.innerHTML = "";
+            results.innerHTML = output;
+
+        });
+
+        /** output */
+        let output = "";
         Array.prototype.forEach.call( searchResults, ( searchResult, i ) => {
-            console.log( JSON.parse( searchResult.meta.taxonomy ) );
+            const taxonomy = JSON.parse( searchResult.meta.taxonomy );
+            output += `<div>
+                <hr>
+                <h4><a href="${searchResult.url}">${searchResult.meta.title}</a></h4>`;
+            output += searchResult.meta.description;
+            output += `<p>`;
+            output += `<strong>Date: </strong>${searchResult.meta.date}`;
+            Array.prototype.forEach.call( taxonomy, ( term, q ) => {
+                output += `<br>`;
+                output += `<strong>${term["@taxonomy"]}</strong>:`;
+                Array.prototype.forEach.call( term.tags, ( tag, p ) => {
+                    output += `<a href="${tag.url}">${tag.title}</a>, `;
+                });
+            });
+            output += `<br></p>&nbsp;`;
+            output += `</div>`;
 		});
+        results.innerHTML = "";
+        results.innerHTML = output;
 
     }
 
 }() );
 </script>
 
-{{- with site.Taxonomies.categories }}
-<h2>Categories</h2>
-<p>
-{{- range . }}
-{{ with .Page }}
-<a href="{{ .RelPermalink }}">{{ .Name | safeHTML }}</a>, 
-{{ end }}
-{{- end }}
-</p>
-
-<h3>Filter by Cateogry</h3>
-
-
-{{- end }}
-
-{{- range ( .RegularPages.ByDate ) }}
-{{ .Render "item" }}
-{{- end }}
+<br>
+<hr>
 
 {{- end }}
