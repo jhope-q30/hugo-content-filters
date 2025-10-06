@@ -20,12 +20,12 @@
 {{- end }}
 </form>
 <div id="results"></div>
-
 <script>
 ( async function(){
 
     const pagefind = await import( "/pagefind/pagefind.js" );
     const results = document.getElementById( "results" );
+    const keyword = document.getElementById( "keyword" );
     const submit = document.getElementById( "submit" );
     const form = document.getElementById( "form" );
     const selectCategory = document.getElementById( "category" );
@@ -40,7 +40,9 @@
 
         /** form */
         submit.addEventListener( 'click', async ( e ) => {
-            const search = await pagefind.search( null, { filters: { categories: selectCategory.value } } );
+
+            const searchTerm = ( keyword.value != "" ) ? keyword.value : null;
+            const search = await pagefind.search( searchTerm, { filters: { categories: selectCategory.value } } );
             const searchResults = await Promise.all( search.results.map( r => r.data() ) );
 
             let output = "";
@@ -49,7 +51,7 @@
                 output += `<div>
                     <hr>
                     <h4><a href="${searchResult.url}">${searchResult.meta.title}</a></h4>`;
-                output += searchResult.meta.description;
+                output += searchResult.excerpt;
                 output += `<p>`;
                 output += `<strong>Date: </strong>${searchResult.meta.date}`;
                 Array.prototype.forEach.call( taxonomy, ( term, q ) => {
