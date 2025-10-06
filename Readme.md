@@ -49,3 +49,59 @@ pass null for all search results tied to filter
 </p>
 
 {{- end }}
+
+<script>
+const data = Array.from({ length: 100 }, (_, i) => `Item ${i + 1}`); // Example data
+const itemsPerPage = 10;
+let currentPage = 1;
+
+function displayPage(pageNumber) {
+    currentPage = pageNumber;
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, data.length);
+    const currentItems = data.slice(startIndex, endIndex);
+
+    // Render currentItems to your HTML element (e.g., a list)
+    const container = document.getElementById('item-container');
+    container.innerHTML = ''; // Clear previous items
+    currentItems.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        container.appendChild(li);
+    });
+
+    updatePaginationControls();
+}
+
+function updatePaginationControls() {
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+    const paginationControls = document.getElementById('pagination-controls');
+    paginationControls.innerHTML = ''; // Clear previous controls
+
+    // Add Previous button
+    const prevButton = document.createElement('button');
+    prevButton.textContent = 'Previous';
+    prevButton.disabled = currentPage === 1;
+    prevButton.addEventListener('click', () => displayPage(currentPage - 1));
+    paginationControls.appendChild(prevButton);
+
+    // Add page number buttons
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i;
+        pageButton.classList.toggle('active', i === currentPage);
+        pageButton.addEventListener('click', () => displayPage(i));
+        paginationControls.appendChild(pageButton);
+    }
+
+    // Add Next button
+    const nextButton = document.createElement('button');
+    nextButton.textContent = 'Next';
+    nextButton.disabled = currentPage === totalPages;
+    nextButton.addEventListener('click', () => displayPage(currentPage + 1));
+    paginationControls.appendChild(nextButton);
+}
+
+// Initial display
+displayPage(1);
+</script>
