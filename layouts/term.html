@@ -1,0 +1,13 @@
+{{ define "main" }}
+{{ print "<!-- ( categories / term ) -->" | safeHTML }}
+{{ .Content }}
+
+{{- $paginator := .Paginate .Pages -}}
+
+{{- range $paginator.Pages }}
+{{ .Render "item" }}
+{{- end }}
+
+{{ partial "customPagination" . }}
+
+{{ end }}

@@ -8,6 +8,7 @@
     <label for="category">Filter by Cateogry</label>
     {{- with site.Taxonomies.categories }}
     <select name="category" id="category">
+        <option value="null">All</option>
         {{- range . }}
         {{ with .Page }}
         <option value="{{ .Name | safeHTML }}">{{ .Name | safeHTML }}</option>
@@ -20,84 +21,5 @@
 {{- end }}
 </form>
 <div id="results"></div>
-<script>
-( async function(){
-
-    const pagefind = await import( "/pagefind/pagefind.js" );
-    const results = document.getElementById( "results" );
-    const keyword = document.getElementById( "keyword" );
-    const submit = document.getElementById( "submit" );
-    const form = document.getElementById( "form" );
-    const selectCategory = document.getElementById( "category" );
-
-    if( results ) {
-
-        pagefind.init();
-
-        const filters = await pagefind.filters();
-        const search = await pagefind.search( null, { filters: { type: "blog" } } );
-        const searchResults = await Promise.all( search.results.map( r => r.data() ) );
-
-        /** form */
-        submit.addEventListener( 'click', async ( e ) => {
-
-            const searchTerm = ( keyword.value != "" ) ? keyword.value : null;
-            const search = await pagefind.search( searchTerm, { filters: { categories: selectCategory.value } } );
-            const searchResults = await Promise.all( search.results.map( r => r.data() ) );
-
-            let output = "";
-            Array.prototype.forEach.call( searchResults, ( searchResult, i ) => {
-                const taxonomy = JSON.parse( searchResult.meta.taxonomy );
-                output += `<div>
-                    <hr>
-                    <h4><a href="${searchResult.url}">${searchResult.meta.title}</a></h4>`;
-                output += searchResult.excerpt;
-                output += `<p>`;
-                output += `<strong>Date: </strong>${searchResult.meta.date}`;
-                Array.prototype.forEach.call( taxonomy, ( term, q ) => {
-                    output += `<br>`;
-                    output += `<strong>${term["@taxonomy"]}</strong>:`;
-                    Array.prototype.forEach.call( term.tags, ( tag, p ) => {
-                        output += `<a href="${tag.url}">${tag.title}</a>, `;
-                    });
-                });
-                output += `<br></p>&nbsp;`;
-                output += `</div>`;
-            });
-            results.innerHTML = "";
-            results.innerHTML = output;
-
-        });
-
-        /** output */
-        let output = "";
-        Array.prototype.forEach.call( searchResults, ( searchResult, i ) => {
-            const taxonomy = JSON.parse( searchResult.meta.taxonomy );
-            output += `<div>
-                <hr>
-                <h4><a href="${searchResult.url}">${searchResult.meta.title}</a></h4>`;
-            output += searchResult.meta.description;
-            output += `<p>`;
-            output += `<strong>Date: </strong>${searchResult.meta.date}`;
-            Array.prototype.forEach.call( taxonomy, ( term, q ) => {
-                output += `<br>`;
-                output += `<strong>${term["@taxonomy"]}</strong>:`;
-                Array.prototype.forEach.call( term.tags, ( tag, p ) => {
-                    output += `<a href="${tag.url}">${tag.title}</a>, `;
-                });
-            });
-            output += `<br></p>&nbsp;`;
-            output += `</div>`;
-		});
-        results.innerHTML = "";
-        results.innerHTML = output;
-
-    }
-
-}() );
-</script>
-
-<br>
-<hr>
 
 {{- end }}

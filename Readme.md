@@ -105,3 +105,110 @@ function updatePaginationControls() {
 // Initial display
 displayPage(1);
 </script>
+
+
+
+<script>/*
+( async function(){
+
+    const pagefind = await import( "/pagefind/pagefind.js" );
+    const results = document.getElementById( "results" );
+    const keyword = document.getElementById( "keyword" );
+    const submit = document.getElementById( "submit" );
+    const form = document.getElementById( "form" );
+    const selectCategory = document.getElementById( "category" );
+
+    if( results ) {
+
+        pagefind.init();
+
+        const filters = await pagefind.filters();
+        const search = await pagefind.search( null, { filters: { type: "blog" } } );
+        const searchResults = await Promise.all( search.results.map( r => r.data() ) );
+
+        submit.addEventListener( 'click', async ( e ) => {
+
+            const searchTerm = ( keyword.value != "" ) ? keyword.value : null;
+            const search = await pagefind.search( searchTerm, { filters: { categories: selectCategory.value } } );
+            const searchResults = await Promise.all( search.results.map( r => r.data() ) );
+
+            let output = "";
+            Array.prototype.forEach.call( searchResults, ( searchResult, i ) => {
+                const taxonomy = JSON.parse( searchResult.meta.taxonomy );
+                output += `<div>
+                    <hr>
+                    <h4><a href="${searchResult.url}">${searchResult.meta.title}</a></h4>`;
+                output += searchResult.excerpt;
+                output += `<p>`;
+                output += `<strong>Date: </strong>${searchResult.meta.date}`;
+                Array.prototype.forEach.call( taxonomy, ( term, q ) => {
+                    output += `<br>`;
+                    output += `<strong>${term["@taxonomy"]}</strong>:`;
+                    Array.prototype.forEach.call( term.tags, ( tag, p ) => {
+                        output += `<a href="${tag.url}">${tag.title}</a>, `;
+                    });
+                });
+                output += `<br></p>&nbsp;`;
+                output += `</div>`;
+            });
+            results.innerHTML = "";
+            results.innerHTML = output;
+
+        });
+
+        let output = "";
+        Array.prototype.forEach.call( searchResults, ( searchResult, i ) => {
+            const taxonomy = JSON.parse( searchResult.meta.taxonomy );
+            output += `<div>
+                <hr>
+                <h4><a href="${searchResult.url}">${searchResult.meta.title}</a></h4>`;
+            output += searchResult.meta.description;
+            output += `<p>`;
+            output += `<strong>Date: </strong>${searchResult.meta.date}`;
+            Array.prototype.forEach.call( taxonomy, ( term, q ) => {
+                output += `<br>`;
+                output += `<strong>${term["@taxonomy"]}</strong>:`;
+                Array.prototype.forEach.call( term.tags, ( tag, p ) => {
+                    output += `<a href="${tag.url}">${tag.title}</a>, `;
+                });
+            });
+            output += `<br></p>&nbsp;`;
+            output += `</div>`;
+		});
+        results.innerHTML = "";
+        results.innerHTML = output;
+
+    }
+
+}() );*/
+</script>
+
+
+
+
+<ul class="pagination pagination-default">
+      <li class="page-item disabled">
+        <a aria-disabled="true" aria-label="First" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">««</span></a>
+      </li>
+      <li class="page-item disabled">
+        <a aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">«</span></a>
+      </li>
+      <li class="page-item active">
+        <a aria-current="page" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item">
+        <a href="/categories/hugo/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
+      </li>
+      <li class="page-item">
+        <a href="/categories/hugo/page/3/" aria-label="Page 3" class="page-link" role="button">3</a>
+      </li>
+      <li class="page-item">
+        <a href="/categories/hugo/page/4/" aria-label="Page 4" class="page-link" role="button">4</a>
+      </li>
+      <li class="page-item">
+        <a href="/categories/hugo/page/2/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">»</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/categories/hugo/page/4/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">»»</span></a>
+      </li>
+    </ul>

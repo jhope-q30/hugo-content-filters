@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{- $currentPage := . -}}
     {{ with .Description }}<meta name="description" data-pagefind-meta="description[content]" content="{{ . | safeHTML }}">{{ end }}
     {{ with .Date }}<meta name="date" data-pagefind-meta="date[content]" content="{{ . | time.Format ":date_medium" }}">{{ end }}
+    {{ with .Type }}<meta name="section" {{ if $currentPage.IsPage }} data-pagefind-filter="section[content]"{{ end }} content="{{ . }}">{{ end }}
     {{ if .IsPage }}
-    {{ with .Type }}<meta name="page:type" data-pagefind-filter="type:{{ . }}">{{ end }}
-    {{- $currentPage := . -}}
     {{ with site.Taxonomies }}
     <script type="application/ld+json" data-pagefind-meta="taxonomy">
         [
@@ -36,7 +36,7 @@
     </script>
     {{ end }}
     {{ end }}
-    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+    <link href="/css/default.css" rel="stylesheet">
     <title>
         {{- if .IsHome -}}
         {{- .Site.Title | safeHTML -}}
@@ -59,6 +59,6 @@
     {{- with resources.Get "js/default.js" | js.Build ( dict "targetPath" "/js/default.js" "minify" ( not hugo.IsDevelopment ) "params" site.Params.styles ) }}
     <script src="{{ .RelPermalink }}"></script>
     {{- end }}
-    {{/*<script src="/js/pagefind.js" async></script>*/}}
+    <script src="/js/pagefind.js"></script>
 </body>
 </html>
