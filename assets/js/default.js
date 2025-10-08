@@ -4,8 +4,6 @@ import { ani } from "./modules/ani";
 
 ( function(){
 
-    console.log( "default js loaded" );
-
     let update = () => {
         console.log( "update", ani );
         console.log( getScrollOffset() );

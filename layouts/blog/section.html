@@ -22,4 +22,9 @@
 </form>
 <div id="results"></div>
 
+{{- with .Paginator }}
+<script type="text/javascript">
+    const $pagerSize = {{ .PagerSize | safeJS }};
+</script>
+{{- end }}
 {{- end }}

@@ -74,6 +74,8 @@ function displayPage(pageNumber) {
 }
 
 function updatePaginationControls() {
+
+  
     const totalPages = Math.ceil(data.length / itemsPerPage);
     const paginationControls = document.getElementById('pagination-controls');
     paginationControls.innerHTML = ''; // Clear previous controls
