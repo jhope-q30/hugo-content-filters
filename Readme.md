@@ -214,3 +214,5 @@ displayPage(1);
         <a href="/categories/hugo/page/4/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">»»</span></a>
       </li>
     </ul>
+
+    "command": "hugo --buildDrafts --cleanDestinationDir; npx -y pageFind --site public;",
