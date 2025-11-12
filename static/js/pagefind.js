@@ -96,10 +96,11 @@ const getPager = ( pager ) => {
         await $pagefind.filters();
 
         /** init search ( by section filter ) */
-        const $search = await $pagefind.search( null, { filters: { section: String( $section.getAttribute( 'content' ) ) } } );
+        const $search = await $pagefind.search( null, { sort: { date: "asc" }, filters: { section: String( $section.getAttribute( 'content' ) ) } } );
         await Promise.all( $search.results.map( $r => $r.data() ) ).then( ( $values ) => {
             /** output to results */
             searchResults = $values;
+            console.log( searchResults );
             $results.innerHTML = "";
             $results.innerHTML = outputPaginatedResults( $values );
         });

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{- $currentPage := . -}}
     {{ with .Description }}<meta name="description" data-pagefind-meta="description[content]" content="{{ . | safeHTML }}">{{ end }}
-    {{ with .Date }}<meta name="date" data-pagefind-meta="date[content]" content="{{ . | time.Format ":date_medium" }}">{{ end }}
+    {{ with .Date }}<meta name="date" data-pagefind-sort="date[content]" data-pagefind-meta="date[content]" content="{{ . | time.Format ":date_medium" }}">{{ end }}
     {{ with .Type }}<meta name="section" {{ if $currentPage.IsPage }} data-pagefind-filter="section[content]"{{ end }} content="{{ . }}">{{ end }}
     {{ if .IsPage }}
     {{ with site.Taxonomies }}
